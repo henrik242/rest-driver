@@ -4,12 +4,12 @@
 
     <groupId>com.github.rest-driver</groupId>
     <artifactId>rest-driver</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>REST Driver</name>
     <description>Test Driver to test your RESTful services and clients</description>
-    <url>https://github.com/rest-driver/rest-driver</url>
+    <url>https://github.com/audoouk/rest-driver</url>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -18,9 +18,9 @@
     </parent>
 
     <scm>
-        <connection>scm:git:git@github.com:rest-driver/rest-driver.git</connection>
-        <developerConnection>scm:git:git@github.com:rest-driver/rest-driver.git</developerConnection>
-        <url>git@github.com:rest-driver/rest-driver.git</url>
+        <connection>scm:git:git@github.com:audoouk/rest-driver.git</connection>
+        <developerConnection>scm:git:git@github.com:audoouk/rest-driver.git</developerConnection>
+        <url>git@github.com:audoouk/rest-driver.git</url>
         <tag>HEAD</tag>
     </scm>
 
@@ -51,9 +51,9 @@
     </modules>
 
     <properties>
-    
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        
+
         <commons.codec.version>1.15</commons.codec.version>
         <commons.io.version>2.11.0</commons.io.version>
         <commons.lang.version>2.6</commons.lang.version>
@@ -61,7 +61,7 @@
         <hamcrest.version>1.3</hamcrest.version>
         <httpclient.version>4.5.13</httpclient.version>
         <jackson.version>2.12.3</jackson.version>
-        <jetty.version>9.4.38.v20210224</jetty.version>
+        <jetty.version>10.0.9</jetty.version>
         <joda.time.version>2.10.9</joda.time.version>
         <junit.version>4.13.2</junit.version>
         <jsonpath.version>2.6.0</jsonpath.version>
@@ -69,7 +69,7 @@
         <mockito.version>1.9.5</mockito.version>
         <slf4j.version>1.7.32</slf4j.version>
         <xmlunit.version>1.6</xmlunit.version>
-        
+
     </properties>
 
     <build>
@@ -88,7 +88,7 @@
                         <logViolationsToConsole>true</logViolationsToConsole>
                     </configuration>
                 </plugin>
-                
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -101,13 +101,24 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.12.0</version>
+                </plugin>
             </plugins>
 
         </pluginManagement>
 
         <plugins>
-        
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -200,12 +211,20 @@
 
         </plugins>
 
+        <extensions>
+            <extension>
+                <groupId>com.github.seahen</groupId>
+                <artifactId>maven-s3-wagon</artifactId>
+                <version>1.3.3</version>
+            </extension>
+        </extensions>
+
     </build>
 
     <dependencyManagement>
 
         <dependencies>
-        
+
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
@@ -229,7 +248,7 @@
                 <artifactId>json-path</artifactId>
                 <version>${jsonpath.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
@@ -295,7 +314,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpmime</artifactId>
@@ -331,7 +350,7 @@
                 <artifactId>slf4j-nop</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>xmlunit</groupId>
                 <artifactId>xmlunit</artifactId>
@@ -341,5 +360,20 @@
         </dependencies>
 
     </dependencyManagement>
+
+    <distributionManagement>
+        <site>
+            <id>s3.site</id>
+            <url>s3://repo.audoo.com/site</url>
+        </site>
+        <repository>
+            <id>s3.release</id>
+            <url>s3://repo.audoo.com/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>s3.snapshot</id>
+            <url>s3://repo.audoo.com/snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

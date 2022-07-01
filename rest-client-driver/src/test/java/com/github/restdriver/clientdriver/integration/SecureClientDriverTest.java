@@ -37,6 +37,7 @@ import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
+import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
 import com.github.restdriver.clientdriver.DefaultRequestMatcher;
@@ -51,7 +52,7 @@ public class SecureClientDriverTest {
         // Arrange
         KeyStore keyStore = getKeystore();
         SecureClientDriver driver = new SecureClientDriver(
-                new DefaultClientDriverJettyHandler(new DefaultRequestMatcher()), 1111, keyStore, "password",
+                new DefaultClientDriverJettyHandler(new DefaultRequestMatcher()), 1112, keyStore, "password",
                 "certificate");
         driver.addExpectation(onRequestTo("/test"), giveEmptyResponse());
 

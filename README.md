@@ -48,6 +48,12 @@ You can also use the client-driver to mock out any remote services which your RE
 
 More info: [Client Driver](https://github.com/rest-driver/rest-driver/wiki/Client-driver)
 
+## Releasing
+
+```
+mvn versions:use-releases -Dmessage="update from snapshot to release" scm:checkin release:clean release:prepare release:perform
+```
+
 ## Other languages
 
 * [rest-cljer](https://github.com/whostolebenfrog/rest-cljer), a convenient Clojure wrapper for REST client driver.

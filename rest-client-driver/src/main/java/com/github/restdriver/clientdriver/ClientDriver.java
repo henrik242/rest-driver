@@ -18,8 +18,7 @@ package com.github.restdriver.clientdriver;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,12 +89,26 @@ public class ClientDriver {
         return jetty;
     }
 
-    protected SslContextFactory getSslContextFactory() {
+    protected SslContextFactory.Server getSslContextFactory() {
         return null;
     }
 
     protected ServerConnector createConnector(Server jetty, int port) {
-        ServerConnector connector = new ServerConnector(jetty, getSslContextFactory());
+        HttpConfiguration httpConfig = new HttpConfiguration();
+        SecureRequestCustomizer src = new SecureRequestCustomizer();
+        src.setSniHostCheck(false);
+        httpConfig.addCustomizer(src);
+        HttpConnectionFactory http11 = new HttpConnectionFactory(httpConfig);
+        SslContextFactory.Server sslContextFactory = getSslContextFactory();
+        ServerConnector connector;
+        if(sslContextFactory != null)
+        {
+            connector = new ServerConnector(jetty, sslContextFactory, http11);
+        }
+        else
+        {
+            connector = new ServerConnector(jetty);
+        }
         connector.setHost(null);
         connector.setPort(port);
         return connector;

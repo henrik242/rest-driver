@@ -76,8 +76,8 @@ public class SecureClientDriver extends ClientDriver {
     }
 
     @Override
-    protected SslContextFactory getSslContextFactory() {
-        SslContextFactory sslContextFactoryFactory = new SslContextFactory();
+    protected SslContextFactory.Server getSslContextFactory() {
+        SslContextFactory.Server sslContextFactoryFactory = new SslContextFactory.Server();
         sslContextFactoryFactory.setKeyStore(keyStore);
         sslContextFactoryFactory.setCertAlias(certificateAlias);
         sslContextFactoryFactory.setKeyStorePassword(password);

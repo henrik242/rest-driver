@@ -10,3 +10,7 @@ target
 *.iml
 *.ipr
 *.iws
+*.next
+*.tag
+*.releaseBackup
+release.properties
