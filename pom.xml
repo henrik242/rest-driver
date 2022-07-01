@@ -9,7 +9,7 @@
 
     <name>REST Driver</name>
     <description>Test Driver to test your RESTful services and clients</description>
-    <url>https://github.com/srgb/rest-driver</url>
+    <url>https://github.com/audoouk/rest-driver</url>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -18,9 +18,9 @@
     </parent>
 
     <scm>
-        <connection>scm:git:git@github.com:srgb/rest-driver.git</connection>
-        <developerConnection>scm:git:git@github.com:srgb/rest-driver.git</developerConnection>
-        <url>git@github.com:srgb/rest-driver.git</url>
+        <connection>scm:git:git@github.com:audoouk/rest-driver.git</connection>
+        <developerConnection>scm:git:git@github.com:audoouk/rest-driver.git</developerConnection>
+        <url>git@github.com:audoouk/rest-driver.git</url>
         <tag>HEAD</tag>
     </scm>
 
